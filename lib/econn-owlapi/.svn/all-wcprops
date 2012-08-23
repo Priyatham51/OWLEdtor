@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/14/trunk/lib/econn-owlapi
+END
+rdfparser.jar
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/14/trunk/lib/econn-owlapi/rdfparser.jar
+END
+license.txt
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/14/trunk/lib/econn-owlapi/license.txt
+END
+io.jar
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/14/trunk/lib/econn-owlapi/io.jar
+END
+owltest.jar
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/14/trunk/lib/econn-owlapi/owltest.jar
+END
+rules.jar
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/14/trunk/lib/econn-owlapi/rules.jar
+END
+validation_test.jar
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/14/trunk/lib/econn-owlapi/validation_test.jar
+END
+validation.jar
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/14/trunk/lib/econn-owlapi/validation.jar
+END
+examples.jar
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/14/trunk/lib/econn-owlapi/examples.jar
+END
+inference.jar
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/14/trunk/lib/econn-owlapi/inference.jar
+END
+api.jar
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/14/trunk/lib/econn-owlapi/api.jar
+END
+owl-servlet.jar
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/14/trunk/lib/econn-owlapi/owl-servlet.jar
+END
+impl.jar
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/14/trunk/lib/econn-owlapi/impl.jar
+END
+abstractparser.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/14/trunk/lib/econn-owlapi/abstractparser.jar
+END
