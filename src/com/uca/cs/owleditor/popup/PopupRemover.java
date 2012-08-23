@@ -97,8 +97,8 @@ public class PopupRemover extends JFrame implements ActionListener{
                
                
                JPanel btnPanel = new JPanel();
-		btnPanel.setLayout(new GridBagLayout());
-              GridBagConstraints gbc = new GridBagConstraints();
+	       btnPanel.setLayout(new GridBagLayout());
+               GridBagConstraints gbc = new GridBagConstraints();
        
                removeBtn = new JButton("Remove");
 		removeBtn.addActionListener(this);
@@ -114,10 +114,7 @@ public class PopupRemover extends JFrame implements ActionListener{
                gbc.gridy = 0;
                btnPanel.add(cancelBtn,gbc);
 		
-               
-//               btnPanel.add(addBtn);
-//		btnPanel.add(cancelBtn);
-		mainPanel.add(new JLabel(""));
+              	mainPanel.add(new JLabel(""));
 		mainPanel.add(btnPanel);
                 
                 
@@ -125,8 +122,8 @@ public class PopupRemover extends JFrame implements ActionListener{
 
 		SpringUtilities.makeCompactGrid(mainPanel,
                 rows, 2, //rows, cols
-                8, 8,        //initX, initY
-                8, 8);       //xPad, yPad
+                6, 6,        //initX, initY
+                6, 6);       //xPad, yPad
        
                 JScrollPane mainScrollPane = new JScrollPane(mainPanel);
                 
@@ -223,7 +220,7 @@ public class PopupRemover extends JFrame implements ActionListener{
                 nameBox.addItem(cls);
             }           
         }
-         if(type.equals("DataProperty Property")){
+         if(type.equals("Data Property")){
             
             Set dataPropSet = new TreeSet();
             dataPropSet.addAll(oomiOwlModel.getWorkingOntology().getDataPropertiesInSignature());
