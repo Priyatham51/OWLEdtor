@@ -131,7 +131,7 @@ public class PopupRemover extends JFrame implements ActionListener{
                 Container content = getContentPane();
 		content.setLayout(new BorderLayout());
 		content.add(mainScrollPane, "Center");
-		setSize(890,390);
+		setSize(790,190);
                 setResizable(true);
                
                

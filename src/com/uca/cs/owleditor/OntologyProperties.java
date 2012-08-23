@@ -180,6 +180,7 @@ public class OntologyProperties extends JPanel {
       popEdit.setTitle("Remover");
       Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
       popEdit.setLocation(620,300);
+      popEdit.pack();
       popEdit.setVisible(true);
   
   
