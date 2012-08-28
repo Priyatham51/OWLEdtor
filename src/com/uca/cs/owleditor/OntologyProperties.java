@@ -21,7 +21,8 @@ import javax.swing.JDesktopPane;
 
 import com.uca.cs.owleditor.popup.PopupNew;
 import com.uca.cs.owleditor.OOMIOwlModel;
-import com.uca.cs.owleditor.popup.PopupEditV2;
+import com.uca.cs.owleditor.popup.PopupEditProperty;
+import com.uca.cs.owleditor.popup.PopupEditClassV2;
 
 
 import java.util.logging.Level;
@@ -46,7 +47,8 @@ public class OntologyProperties extends JPanel {
     JPanel ontologyPropertiesPanel = null;
     
     
-    JButton addClassBtn, addPropBtn, removeBtn, editBtn;
+    JButton addClassBtn, addPropBtn, removeBtn, editClassBtn,
+            editPropBtn,addIndividualBtn;
     
     
     public  OntologyProperties(OOMIOwlModel model){
@@ -88,25 +90,39 @@ public class OntologyProperties extends JPanel {
         }
     });
         
-        editBtn = new JButton("Edit");
-        editBtn.setHorizontalTextPosition(AbstractButton.LEFT);
-        editBtn.addActionListener(new ActionListener(){
+        editClassBtn = new JButton("Edit Class");
+        editClassBtn.setHorizontalTextPosition(AbstractButton.LEFT);
+        editClassBtn.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e){
             
-            editActionPerfomed(e);
+            editClassActionPerfomed(e);
             
         }
+    });
+        
+        
+        editPropBtn = new JButton("Edit Prop");
+        editPropBtn.setHorizontalTextPosition(AbstractButton.LEFT);
+        editPropBtn.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent e){
+            
+            editPropActionPerfomed(e);
+            
+        }
+
+            
     });
         
         
         
         
         JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setLayout(new GridLayout(2,2));
+        buttonsPanel.setLayout(new GridLayout(2,3));
         buttonsPanel.add(addClassBtn);
         buttonsPanel.add(addPropBtn);
         buttonsPanel.add(removeBtn);
-        buttonsPanel.add(editBtn);
+        buttonsPanel.add(editClassBtn);
+        buttonsPanel.add(editPropBtn);
         
         
 
@@ -161,16 +177,28 @@ public class OntologyProperties extends JPanel {
    }
   
   
-  private void editActionPerfomed(ActionEvent e) {
+  private void editClassActionPerfomed(ActionEvent e) {
                 
       System.out.println("Edit Button Pressed.");
-      PopupEditV2 popEdit = new PopupEditV2(this,oomiOwlModel,oomiOwlModel.getWorkingOntology());
+      PopupEditClassV2 popEdit = new PopupEditClassV2(this,oomiOwlModel,oomiOwlModel.getWorkingOntology());
       popEdit.setTitle("Class Editor");
       Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
       popEdit.setLocation(620,300);
       popEdit.setVisible(true);
   
   
+  }
+  
+  private void editPropActionPerfomed(ActionEvent e) {
+  
+      System.out.println("Edit Property Pressed");
+      PopupEditProperty popEdit = new PopupEditProperty(oomiOwlModel);
+      popEdit.setTitle("Prop Editor");
+      Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+      popEdit.setLocation(620,300);
+      popEdit.setVisible(true);
+  
+      
   }
   
   private void removeActionPerfomed(ActionEvent e) {
@@ -182,11 +210,11 @@ public class OntologyProperties extends JPanel {
       popEdit.setLocation(620,300);
       popEdit.pack();
       popEdit.setVisible(true);
-  
+              
   
   }
-   
-   
-    
-    
+  
+  
+  
+        
 }

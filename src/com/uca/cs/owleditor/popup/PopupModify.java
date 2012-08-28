@@ -25,6 +25,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
@@ -48,21 +49,50 @@ public class PopupModify extends JFrame implements ActionListener{
     OWLEntity newEntity;
     OWLDataFactory factory;
     OOMIOwlModel oomiOwlModel;
-    PopupEditV2 popupEditor;
+    PopupEditClassV2 popupClassEditor;
+    PopupEditProperty popupPropertyEditor;
     JButton saveBtn,cancelBtn;
     
     
     JPanel mainPanel, mainCheckBoxPanel;
     JPanel mainBtnPanel;
 
-    public PopupModify(String type, OOMIOwlModel oomiOwlModel,PopupEditV2 popupEdit) {
+    public PopupModify(String type, OOMIOwlModel oomiOwlModel,PopupEditClassV2 popupEdit) {
         
         
        checkBoxes = new ArrayList<JCheckBox>();
         this.type = type;
         this.oomiOwlModel = oomiOwlModel;
         this.ontology = oomiOwlModel.getWorkingOntology();
-        this.popupEditor = popupEdit;
+        this.popupClassEditor = popupEdit;
+        
+        try{
+            setupUI();
+            JScrollPane mainScrollPane = new JScrollPane(mainCheckBoxPanel);
+            mainScrollPane.setPreferredSize(new Dimension(300,50));
+            Container content = getContentPane();
+            content.setLayout(new BorderLayout());
+            content.add(mainScrollPane, BorderLayout.CENTER);
+            content.add(mainBtnPanel,BorderLayout.PAGE_END);
+            setSize(890,390);
+            setResizable(true);
+            setTitle("Modify "+type);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+    }
+    
+    
+     public PopupModify(String type, OOMIOwlModel oomiOwlModel,PopupEditProperty popupEdit) {
+        
+        
+       checkBoxes = new ArrayList<JCheckBox>();
+        this.type = type;
+        this.oomiOwlModel = oomiOwlModel;
+        this.ontology = oomiOwlModel.getWorkingOntology();
+        this.popupPropertyEditor = popupEdit;
         
         try{
             setupUI();
@@ -115,7 +145,7 @@ public class PopupModify extends JFrame implements ActionListener{
              JCheckBox jcb = new JCheckBox(cls.toStringID());
              
               Set currentClassList =new TreeSet();
-              currentClassList.addAll(popupEditor.getSelectedClass().getSuperClasses(ontology));
+              currentClassList.addAll(popupClassEditor.getSelectedClass().getSuperClasses(ontology));
               Iterator currentClassIterator = currentClassList.iterator();
               while(currentClassIterator.hasNext()){
                   OWLClass clsCheck = (OWLClass) currentClassIterator.next();
@@ -136,47 +166,78 @@ public class PopupModify extends JFrame implements ActionListener{
            
           
         }
-        
-        if(type.equals("subClass"))
-        {
-            Set superClassSet = new TreeSet();
-            superClassSet.addAll(ontology.getClassesInSignature());
-           Iterator superIterator = superClassSet.iterator();
-           while(superIterator.hasNext()){
-             OWLClass cls = (OWLClass)superIterator.next();
-              Set currentClassList =new TreeSet();
-              JCheckBox jcb = new JCheckBox(cls.toStringID());
-              currentClassList.addAll(popupEditor.getSelectedClass().getSubClasses(ontology));
-              Iterator currentClassIterator = currentClassList.iterator();
-              while(currentClassIterator.hasNext()){
-                  OWLClass clsCheck = (OWLClass) currentClassIterator.next();
-                  if(cls.toStringID().equals(clsCheck.toStringID()))
-                  {
-                      jcb.setSelected(true);
+        else
+            if(type.equals("subClass"))
+            {
+                Set superClassSet = new TreeSet();
+                superClassSet.addAll(ontology.getClassesInSignature());
+               Iterator superIterator = superClassSet.iterator();
+               while(superIterator.hasNext()){
+                 OWLClass cls = (OWLClass)superIterator.next();
+                  Set currentClassList =new TreeSet();
+                  JCheckBox jcb = new JCheckBox(cls.toStringID());
+                  currentClassList.addAll(popupClassEditor.getSelectedClass().getSubClasses(ontology));
+                  Iterator currentClassIterator = currentClassList.iterator();
+                  while(currentClassIterator.hasNext()){
+                      OWLClass clsCheck = (OWLClass) currentClassIterator.next();
+                      if(cls.toStringID().equals(clsCheck.toStringID()))
+                      {
+                          jcb.setSelected(true);
+                      }
                   }
-              }
-             checkBoxes.add(jcb);
-                 
-           }
-           
-           
-           Iterator checkBoxIterator = checkBoxes.listIterator();
-           while(checkBoxIterator.hasNext()){
-               mainCheckBoxPanel.add((JCheckBox)checkBoxIterator.next());
-           }
-           
-        }
-        if(type.equals("annotation"))
-        {
-            
-            
-           
-            Set annotationsSet = new TreeSet();
-            annotationsSet.addAll(popupEditor.getSelectedClass().getAnnotationAssertionAxioms(ontology));
-            Iterator superIterator = annotationsSet.iterator();
-            System.out.println(superIterator.next().toString());
-            
-        }
+                 checkBoxes.add(jcb);
+
+               }
+
+
+               Iterator checkBoxIterator = checkBoxes.listIterator();
+               while(checkBoxIterator.hasNext()){
+                   mainCheckBoxPanel.add((JCheckBox)checkBoxIterator.next());
+               }
+
+            }
+            else
+                if(type.equals("annotation"))
+                {
+
+                    Set annotationsSet = new TreeSet();
+                    annotationsSet.addAll(popupClassEditor.getSelectedClass().getAnnotationAssertionAxioms(ontology));
+                    Iterator superIterator = annotationsSet.iterator();
+                    System.out.println(superIterator.next().toString());
+
+                }
+                else
+                   if(type.equals("Data")){
+                       
+
+                       Set superClassSet = new TreeSet();
+                       superClassSet.addAll(ontology.getClassesInSignature());
+                       Iterator superIterator = superClassSet.iterator();
+                       while(superIterator.hasNext()){
+                         OWLClass cls = (OWLClass)superIterator.next();
+                          Set currentClassList =new TreeSet();
+                          JCheckBox jcb = new JCheckBox(cls.toStringID());
+                          currentClassList.addAll(popupClassEditor.getSelectedClass().getSubClasses(ontology));
+                          Iterator currentClassIterator = currentClassList.iterator();
+                          while(currentClassIterator.hasNext()){
+                              OWLClass clsCheck = (OWLClass) currentClassIterator.next();
+                              if(cls.toStringID().equals(clsCheck.toStringID()))
+                              {
+                                  jcb.setSelected(true);
+                              }
+                          }
+                         checkBoxes.add(jcb);
+
+                       }
+
+
+                       Iterator checkBoxIterator = checkBoxes.listIterator();
+                       while(checkBoxIterator.hasNext()){
+                           mainCheckBoxPanel.add((JCheckBox)checkBoxIterator.next());
+                       }
+                       
+
+                   }
     }
 
     @Override
@@ -198,12 +259,12 @@ public class PopupModify extends JFrame implements ActionListener{
                 
             }
             
-           oomiOwlModel.addClass(popupEditor.getSelectedClass(), names,type);
+           oomiOwlModel.addClass(popupClassEditor.getSelectedClass(), names,type);
           if(type.equals("superClass")){
-              popupEditor.superClassList.setListData(popupEditor.fillSubClassOfList());
+              popupClassEditor.superClassList.setListData(popupClassEditor.fillSubClassOfList());
           }
           if(type.equals("subClass")){
-              popupEditor.subClassList.setListData(popupEditor.fillSuperClassOfList());
+              popupClassEditor.subClassList.setListData(popupClassEditor.fillSuperClassOfList());
           }
            this.dispose();
         }

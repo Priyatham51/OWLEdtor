@@ -140,18 +140,7 @@ public class PopupRemover extends JFrame implements ActionListener{
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+     
     
     
     @Override
